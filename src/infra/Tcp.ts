@@ -1,10 +1,11 @@
 import "reflect-metadata";
-import { express } from "express";
+import express from "express";
 import { useExpressServer } from "routing-controllers";
 
 import { IService } from "../types/services";
 import { controllers } from "app/domain";
 import { middlewares } from "app/middlewares";
+import Person from "app/domain/person/Person";
 
 export class Tcp implements IService {
   private static instance: Tcp;
@@ -27,7 +28,7 @@ export class Tcp implements IService {
 
     useExpressServer(server, {
       routePrefix,
-      controllers,
+      controllers: [Person],
       middlewares,
       cors: true,
       defaultErrorHandler: true,
